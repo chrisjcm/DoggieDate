@@ -10,9 +10,11 @@ namespace DoggieDate.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [PersonalData]
-        //[Required]
-        [Column(TypeName="varchar(100)")]
-        public string FirstName { get; set; }
+        public int? AnimalId { get; set; }
+        public Animal Animal { get; set; }
+
+        public IEnumerable<Contact> Contacts { get; set; }
+
+        public IEnumerable<Message> Messages { get; set; }
     }
 }
