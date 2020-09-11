@@ -42,26 +42,27 @@ namespace DoggieDate.Data
             // PK Contacts
             builder.Entity<Contact>().HasKey(x => new { x.UserId, x.ContactId });
 
-            // User Contacts
+            // User has Contacts
             builder.Entity<Contact>()
                 .HasOne(u => u.User)
                 .WithMany(c => c.Contacts)
                 .HasForeignKey(k => k.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Contacts of users
+            // User is contact
             builder.Entity<Contact>()
                 .HasOne(u => u.UserContact)
                 .WithMany()
                 .HasForeignKey(k => k.ContactId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Messages
+            // User has messages
             builder.Entity<Message>()
                 .HasOne(u => u.Receiver)
                 .WithMany(m => m.Messages)
                 .HasForeignKey(k => k.ReceiverId);
 
+            // User sent messages
             builder.Entity<Message>()
                 .HasOne(u => u.Sender)
                 .WithMany()
@@ -70,5 +71,7 @@ namespace DoggieDate.Data
 
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<DoggieDate.Models.Animal> Animal { get; set; }
+        public DbSet<DoggieDate.Models.Message> Message { get; set; }
     }
 }
