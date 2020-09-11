@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DoggieDate.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoggieDate.Controllers
 {
@@ -18,6 +19,7 @@ namespace DoggieDate.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
