@@ -40,29 +40,20 @@ namespace DoggieDate.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UserPreferences",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    AnimalId = table.Column<int>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Breed = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
+                    Traits = table.Column<string>(nullable: true),
+                    Activities = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Animals_AnimalId",
-                        column: x => x.AnimalId,
-                        principalTable: "Animals",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_UserPreferences", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,6 +75,39 @@ namespace DoggieDate.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    AnimalId = table.Column<int>(nullable: true),
+                    PreferencesId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Animals_AnimalId",
+                        column: x => x.AnimalId,
+                        principalTable: "Animals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Users_UserPreferences_PreferencesId",
+                        column: x => x.PreferencesId,
+                        principalTable: "UserPreferences",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +201,7 @@ namespace DoggieDate.Migrations
                 {
                     UserId = table.Column<string>(nullable: false),
                     ContactId = table.Column<string>(nullable: false),
+                    Accepted = table.Column<bool>(nullable: false),
                     Blocked = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -282,6 +307,11 @@ namespace DoggieDate.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_PreferencesId",
+                table: "Users",
+                column: "PreferencesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -315,6 +345,9 @@ namespace DoggieDate.Migrations
 
             migrationBuilder.DropTable(
                 name: "Animals");
+
+            migrationBuilder.DropTable(
+                name: "UserPreferences");
         }
     }
 }

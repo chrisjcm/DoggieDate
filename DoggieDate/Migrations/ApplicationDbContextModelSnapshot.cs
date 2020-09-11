@@ -79,6 +79,9 @@ namespace DoggieDate.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PreferencesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -98,6 +101,8 @@ namespace DoggieDate.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("PreferencesId");
+
                     b.ToTable("Users");
                 });
 
@@ -108,6 +113,9 @@ namespace DoggieDate.Migrations
 
                     b.Property<string>("ContactId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
@@ -151,6 +159,33 @@ namespace DoggieDate.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("DoggieDate.Models.UserPreferences", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Activities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Breed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Traits")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserPreferences");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -293,6 +328,10 @@ namespace DoggieDate.Migrations
                     b.HasOne("DoggieDate.Models.Animal", "Animal")
                         .WithMany()
                         .HasForeignKey("AnimalId");
+
+                    b.HasOne("DoggieDate.Models.UserPreferences", "Preferences")
+                        .WithMany()
+                        .HasForeignKey("PreferencesId");
                 });
 
             modelBuilder.Entity("DoggieDate.Models.Contact", b =>

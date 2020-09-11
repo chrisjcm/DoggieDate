@@ -71,7 +71,7 @@ namespace DoggieDate.Data
 
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<DoggieDate.Models.Animal> Animal { get; set; }
-        public DbSet<DoggieDate.Models.Message> Message { get; set; }
+        public DbSet<Animal> Animal { get; set; }
+        public DbSet<Message> Message { get; set; }
     }
 }

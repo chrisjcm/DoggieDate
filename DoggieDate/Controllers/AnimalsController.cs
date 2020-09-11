@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoggieDate.Data;
 using DoggieDate.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoggieDate.Controllers
 {
