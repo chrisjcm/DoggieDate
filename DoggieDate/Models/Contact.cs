@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,10 @@ namespace DoggieDate.Models
         public string ContactId { get; set; }
         public ApplicationUser UserContact { get; set; }
 
+        [DefaultValue(false)] // vet ej om behövs
+        public bool Accepted { get; set; } // True = friends - False = pending invite
+
+        [DefaultValue(false)] // vet ej om behövs
         public bool Blocked { get; set; }
     }
 }
