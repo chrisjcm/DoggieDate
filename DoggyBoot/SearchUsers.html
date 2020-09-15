@@ -1,0 +1,331 @@
+<!-- THIS IS THE BEST HTML -->
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>DoggieDate</title>
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="assets/EkkoLightbox/EkkoLightbox.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/MainDoggy.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+<!-- Streches content page down to bottom of screen-->
+<div id="wrap">
+  <div id="main">
+
+  <!-- Navigation -->
+
+
+  <!-- TOP NAVBAR -->
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	    <div class="container">
+	      <a class="navbar-brand" href="#">DoggieDate</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	      <div class="collapse navbar-collapse" id="navbarResponsive">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="#">Hem
+	              <span class="sr-only">(current)</span>
+	            </a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">Om oss</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">Matchningar</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">Contact</a>
+	          </li>
+
+	          <li class="nav-item">
+	            <!-- Trigger the modal with a button -->
+	            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModalLogin">Logga in</button>
+	          </li>
+	          <li class="nav-item">
+	            <!-- Trigger the modal with a button -->
+	            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalLogout">Logga ut</button>
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+
+
+  <!-- BOTTOM NAVBAR -->
+	  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	    <a class="navbar-brand" href="#">SÖK ANVÄNDARE</a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	      <ul class="navbar-nav mr-auto">
+
+	      </ul>
+	      <form class="form-inline my-2 my-lg-0">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon1">@</span>
+				  </div>
+				<input type="text" class="form-control" placeholder="användare" aria-label="användare" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+				  <button class="btn btn-outline-success" type="submit">Sök</button>
+				</div>
+			  </div>
+			
+
+		  </form>
+		  
+
+		  
+
+
+
+
+
+		  
+	    </div>
+	  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+
+    <!-- Modal - INLOGGNINGS POPUP -->
+      <div class="container">
+        <div class="modal fade" id="myModalLogin" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Ange inloggnings info</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+              
+                <!--Inlog Formulär -->
+                <form>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="inputPassword3" placeholder="Lösenord">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                          Komihåg mig
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-10">
+                      <button type="submit" class="btn btn-primary">Logga in</button>
+                    </div>
+                  </div>
+                </form>
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng &times;</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Modal - LOGOUT POPUP -->
+      <div class="container">
+        <div class="modal fade" id="myModalLogout" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">DU HAR LOGGAT UT</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <p>Tack för att du använder DoggyDate</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng &times;</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Modal - Message POPUP -->
+      <div class="container">
+        <div class="modal fade" id="ModalMessage" tabindex="-1" role="dialog" aria-labelledby="ModalMessageLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalMessageLabel">Nytt Meddelande</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Mottagare:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Meddelande:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                <button type="button" class="btn btn-primary">Skicka meddelande</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+    <!-- Page Features -->
+	<div class="container-fluid">
+		<div class="card">
+		    <div class="card-body">
+		    <div class="row">
+			    <div class=".col">
+						      
+					<div class="card ml-3 mb-3" style="width: 10rem;">
+												
+					    <a href="https://bootdey.com/img/Content/avatar/avatar1.png" data-toggle="lightbox" data-gallery="gallery">
+					      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid rounded img-thumbnail"  data-title="A random title">
+					    </a>
+
+
+					  <div class="card-body">
+						<h6 class="card-title">Eruk hundson54</h6>
+						<div class="progress">
+							<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+						  </div>
+					  </div>
+
+					  <ul class="list-group list-group-flush">
+					    <li class="list-group-item">
+							<span class="badge badge-dark">Dark</span>
+							<span class="badge badge-dark">Cool</span>
+							<span class="badge badge-dark">Rolig</span>
+							<span class="badge badge-dark">Spännande</span>
+							<span class="badge badge-dark">Omtänksam</span>
+							<span class="badge badge-dark">Dark</span>
+							<span class="badge badge-primary">Modig</span>
+						</li>
+					    <li class="list-group-item">
+
+							
+							<!-- Example single danger button -->
+							<div class="btn-group">
+							  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Moderator
+							  </button>
+							  <div class="dropdown-menu">
+							    <a class="dropdown-item" href="#">Ge beröm</a>
+							    <a class="dropdown-item" href="#">Ge varning</a>
+							    <a class="dropdown-item" href="#">Spärra konto</a>
+							    <div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Återställ lösenord</a>
+								
+								<a class="dropdown-item" href="#"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalMessage" data-whatever="@fat">Skicka medd till @fat</button></a>
+
+
+								
+							  </div>
+							</div>
+
+					    </li>
+					  </ul>
+
+					</div>
+					
+					<!-- end of card -->
+
+				</div>
+				<!--end of coltag-->
+
+		  			
+		  			<div class="row">
+		  				<div class="container-fluid">
+
+						</div>
+					</div>
+
+			    </div>
+		  </div>
+		    </div>
+		</div>
+	</div>
+
+
+
+
+
+    <!-- /.row -->
+
+
+
+
+  <!-- /.container -->
+
+</div>
+</div>
+    <!-- Footer -->
+	<footer class="footer py-4 bg-dark">
+	    <div class="container">
+	      <p class="text-center text-white">Copyright &copy; DoggyDate 2020</p>
+	    </div>
+    <!-- /.container -->
+	</footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="assets/jquery/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/EkkoLightbox/EkkoLightbox.js"></script>
+  
+  <!-- Custom -->
+  <!-- Currently only puts username in messagesend -->
+  <script src="assets/js/Doggy.js"></script>
+
+
+</body>
+
+</html>
