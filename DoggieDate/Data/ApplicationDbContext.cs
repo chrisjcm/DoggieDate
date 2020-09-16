@@ -67,11 +67,21 @@ namespace DoggieDate.Data
                 .HasOne(u => u.Sender)
                 .WithMany()
                 .HasForeignKey(k => k.SenderId);
-        }
+
+			//Traits Foreign keys
+			builder.Entity<wantsTrait>().HasKey(x => new { x.TraitId, x.UserId });
+			builder.Entity<hasTrait>().HasKey(x => new { x.TraitId, x.UserId });
+
+		}
 
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Animal> Animal { get; set; }
-        public DbSet<Message> Message { get; set; }
-    }
+		public DbSet<Message> Message { get; set; }
+
+		public DbSet<hasTrait> hasTraits { get; set; }
+		public DbSet<wantsTrait> wantsTraits { get; set; }
+		public DbSet<Trait> UserTraits { get; set; }
+
+	}
 }
