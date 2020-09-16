@@ -25,8 +25,12 @@ namespace DoggieDate.Models
 	}
 
 	//m2m Relationship
-	public class hasTrait : wantsTrait
+	public class hasTrait
 	{
+		public int TraitId { get; set; }
+		public Trait Trait { get; set; }
 
+		public string UserId { get; set; }
+		public ApplicationUser User { get; set; }
 	}
 }
