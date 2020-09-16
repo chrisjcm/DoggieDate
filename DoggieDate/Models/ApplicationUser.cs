@@ -10,14 +10,10 @@ namespace DoggieDate.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public int? AnimalId { get; set; }
-        public Animal Animal { get; set; }
+		public IEnumerable<Trait> HasTrait { get; set; }
+		public IEnumerable<Trait> DesiredTrait { get; set; }
 
-        public int? PreferencesId { get; set; }
-        public UserPreferences Preferences { get; set; }
-
-        public IEnumerable<Contact> Contacts { get; set; }
-
+		public IEnumerable<Contact> Contacts { get; set; }
         public IEnumerable<Message> Messages { get; set; }
     }
 }
