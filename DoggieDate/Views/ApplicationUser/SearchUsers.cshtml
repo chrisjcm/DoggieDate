@@ -1,0 +1,14 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Sök";
+}
+
+@if (Model.Email.Contains("123"))
+{
+    <p>Finns</p>
+}
+else
+{
+    <p>Nej</p>
+}
