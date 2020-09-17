@@ -7,6 +7,7 @@ using DoggieDate.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoggieDate.Controllers
 {
@@ -41,5 +42,45 @@ namespace DoggieDate.Controllers
 
             return View(user);
         }
+        public IActionResult Contacts()
+        {
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
+            user.Contacts = _context.Contact.Include(c => c.User).Include(c => c.UserContact).Where(c => c.UserId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true || c.ContactId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true).ToList<Contact>();
+            return View(user);
+            
+        }
+        public async Task<IActionResult> DeleteContact(Contact id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contact = await _context.Contact
+                .Include(c => c.User)
+                .Include(c => c.UserContact)
+                .FirstOrDefaultAsync(m => m.UserId == id.UserId);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            return View(contact);
+        }
+
+        // POST: Contacts/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Contact id)
+        {
+
+            _context.Contact.Remove(id);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Contacts));
+        }
+
+
+
+
     }
 }
