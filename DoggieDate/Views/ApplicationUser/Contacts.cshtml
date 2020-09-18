@@ -1,0 +1,101 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Kontakter";
+}
+<h1>Index</h1>
+
+<div class="profile-content">
+    <!-- begin tab-content -->
+    <div class="tab-content p-0">
+        <!-- begin #profile-friends tab -->
+        <div class="tab-pane fade in active show" id="profile-friends">
+            <h4 class="m-t-0 m-b-20">Kontaktlista</h4>
+            <!-- begin row -->
+            <div class="row row-space-2">
+
+                @foreach (var item in Model.Contacts)
+                {
+                    <!-- begin col-6 -->
+                    <div class="col-md-6 m-b-2" >
+                        <div class="p-10 bg-white">
+                            <div class="media media-xs overflow-visible">
+                                <a class="media-left" href="javascript:;">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                </a>
+                                <div class="media-body valign-middle">
+                                    @if (Model.UserName == item.UserContact.UserName)
+                                    {
+                                        <b class="text-inverse">@Html.DisplayFor(modelItem => item.User.UserName) </b>
+
+                                    }
+                                    else
+                                    {
+
+                                        <b class="text-inverse">@Html.DisplayFor(modelItem => item.UserContact.UserName)</b>
+                                    }
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Alternativ
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#ModalMessage" data-whatever="">Skicka meddelande</a>
+                                            <div class="dropdown-divider"></div>
+
+                                             @Html.ActionLink("Ta bort", "DeleteContact",item)
+                                        </div>
+                                    </div>
+                                    @*<form asp-action="DeleteContactAsync">
+
+                                            <input type="hidden" asp-for="@item" />
+                                            <input type="submit" value="ta bort" class="btn btn-danger" />
+                                        </form>
+                                        <form asp-action="Messages">
+
+                                            <input type="hidden" asp-for="@item" />
+                                            <input type="submit" value="Skicka meddelande" class="btn btn-light" />
+                                        </form>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end #profile-friends tab -->
+    </div>
+    <!-- end tab-content -->
+</div>
+<div class="container">
+    <div class="modal fade" id="ModalMessage" tabindex="-1" role="dialog" aria-labelledby="ModalMessageLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalMessageLabel">Nytt Meddelande</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Mottagare:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Meddelande:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                    <button type="button" class="btn btn-primary">Skicka meddelande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

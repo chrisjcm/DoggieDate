@@ -1,0 +1,31 @@
+﻿@model DoggieDate.Models.Contact
+
+    @{
+        ViewData["Title"] = "Delete";
+    }
+
+    <h1>Delete</h1>
+
+    <h3>Är du säker på att du vill ta bort denna kontakt?</h3>
+    <div>
+        <h4>Contact</h4>
+        <hr />
+        <dl class="row">
+
+            @*<dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.UserContact)
+            </dt>*@
+
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="ContactId" />
+            <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+            <a asp-action="Contacts">Tillbaka till kontakter</a>
+        </form>
+    </div>
