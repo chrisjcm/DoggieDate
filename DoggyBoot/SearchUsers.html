@@ -74,7 +74,8 @@
 
   <!-- BOTTOM NAVBAR -->
 	  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	    <a class="navbar-brand" href="#">SÖK ANVÄNDARE</a>
+		<a class="navbar-brand" href="#">Browsa</a>
+		
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
@@ -107,6 +108,19 @@
 		  
 	    </div>
 	  </nav>
+
+	<!-- 2 radio controls . | Matched | Non Matched | -->
+	  <div class="container-fluid mb-3">
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+			<label class="custom-control-label" for="customRadioInline1">Matchade</label>
+		  </div>
+		  <div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+			<label class="custom-control-label" for="customRadioInline2">Alla användare</label>
+		  </div>
+
+	  </div>
 
   <!-- Page Content -->
   <div class="container">
@@ -239,29 +253,45 @@
 	
 						  <div class="card-body">
 							<h6 class="card-title">Eruk hundson54</h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-							  </div>
+
 						  </div>
 	
 						  <ul class="list-group list-group-flush">
 							<li class="list-group-item">
-								<span class="badge badge-dark">Dark</span>
-								<span class="badge badge-dark">Cool</span>
-								<span class="badge badge-dark">Rolig</span>
-								<span class="badge badge-dark">Spännande</span>
-								<span class="badge badge-dark">Omtänksam</span>
-								<span class="badge badge-dark">Dark</span>
-								<span class="badge badge-primary">Modig</span>
+								<p>Är en rolig kis som kan göra allt möjligt !</p>
 							</li>
+							<li class="list-group-item">
+								
+								<!--class="btn btn-success" if matched-->
+								<button type="button" class="btn btn-outline-secondary" >👍</button>
+								<button type="button" class="btn btn-outline-success" title="Skicka ett meddelande" data-toggle="modal" data-target="#ModalMessage" data-whatever="erik hundson">📧</button>
+
+								
+							</li>
+
 							<li class="list-group-item">
 	
 								
 								<!-- Example single danger button -->
 								<div class="btn-group">
-								  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Moderator
+								  <button type="button" class="btn btn-danger dropdown-toggle "  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Handling
 								  </button>
+
+								  
+								  <div class="dropdown-menu">
+									<a class="dropdown-item" href="#">Ge beröm</a>
+									<a class="dropdown-item" href="#">Ge varning</a>
+									<a class="dropdown-item" href="#">Spärra konto</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Återställ lösenord</a>
+									
+									<a class="dropdown-item" href="#"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalMessage" data-whatever="@fat">Skicka medd till @fat</button></a>
+
+									
+								  </div>
+
+
 								  <div class="dropdown-menu">
 									<a class="dropdown-item" href="#">Ge beröm</a>
 									<a class="dropdown-item" href="#">Ge varning</a>
