@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoggieDate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200916162259_initialize")]
-    partial class initialize
+    [Migration("20200920161321_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
