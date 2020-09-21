@@ -111,13 +111,17 @@
 
 
     <!-- Jumbotron Header -->
-	    <header class="jumbotron my-4">
-            <img src="https://w.wallhaven.cc/full/01/wallhaven-01g8ew.jpg" width="300" alt="Italian Trulli">
-            <h1 class="display-3">Välkommen till DoggieDate!</h1>
-            <p class="lead">
+	    <header class="col-lg-12 h-100 d-flex" >
+            <div class="container py-5 align-items-center" style="position:relative; height:100vh;">
+
+            <div class="jumbotron my-auto text-center text-white shadow rounded" style="width:inherit; position:absolute; top:40%; left:50%; transform:translate(-50%, -50%); background-image: url(https://w.wallhaven.cc/full/01/wallhaven-01g8ew.jpg); background-position:center; background-size:cover;" >
+
+            @*<img src="https://w.wallhaven.cc/full/01/wallhaven-01g8ew.jpg" width="550">*@
+            <h1 class=" mb-4">Välkommen till <br /> DoggieDate!</h1>
+            <p class="mb-4">
 
 
-            Välkommen till den bästa dejting sajten i världen för hundar! Registrera dig redan idag
+            Sveriges största datingsite för hundar! Registrera dig redan idag
             </p>
 
 		
@@ -126,6 +130,8 @@
             asp-area="Identity" 
             asp-page="/Account/Register">Registrera nu!
             </a>
+            </div>
+            </div>
     </header>
 
     </div>
