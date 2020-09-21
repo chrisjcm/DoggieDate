@@ -92,6 +92,8 @@ namespace DoggieDate.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+                    await AssignRoleAsync(Input.Email, "Member");
+
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
@@ -110,6 +112,15 @@ namespace DoggieDate.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task<IdentityResult> AssignRoleAsync(string email, string role)
+        {
+            // Find user with email to get ID
+            ApplicationUser user = await _userManager.FindByEmailAsync(email);
+
+            // Add user to role
+            return await _userManager.AddToRoleAsync(user, role);
         }
     }
 }
