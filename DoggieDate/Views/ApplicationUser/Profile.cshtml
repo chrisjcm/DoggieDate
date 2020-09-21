@@ -1,0 +1,130 @@
+﻿@model DoggieDate.Models.ApplicationUser
+
+@{
+	ViewData["Title"] = "Profil";
+}
+
+<div class="container-fluid">
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class=".col">
+
+					<div class="card ml-3 mb-3" style="width: 18rem;">
+
+						<a href="https://bootdey.com/img/Content/avatar/avatar1.png" data-toggle="lightbox" data-gallery="gallery">
+							<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid rounded img-thumbnail" data-title="A random title">
+						</a>
+
+						<div class="card-body">
+							<h5 class="card-title">@Html.DisplayFor(model => model.Dogname)</h5>
+							<p class="card-text">Jag är en kul kis som gillar allt möjligt på denna jord. Ska vi leka?!.</p>
+						</div>
+
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+
+								<!--class="btn btn-success" if matched-->
+								<button type="button" class="btn btn-outline-secondary">👍</button>
+								<button type="button" class="btn btn-outline-success" title="Skicka ett meddelande" data-toggle="modal" data-target="#ModalMessage" data-whatever="erik hundson">📧</button>
+							</li>
+							
+
+		@if (User.IsInRole("Admin") )
+		{
+					<!--MODERATOR DROPOWN-->
+							<li class="list-group-item">
+								<!-- Example single danger button -->
+								<div class="btn-group">
+									<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Moderator
+									</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Ge beröm</a>
+										<a class="dropdown-item" href="#">Ge varning</a>
+										<a class="dropdown-item" href="#">Spärra konto</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Återställ lösenord</a>
+									</div>
+								</div>
+							</li>
+		}
+
+
+				
+
+						</ul>
+						
+					</div>
+				</div>
+				<div class="col  ml-3" style="min-width:200px">
+					<div class="row">
+						<div class="card  mb-3">
+
+							<div class="card-header">
+								Om mig
+							</div>
+
+							<div class="card-body">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">Ägare: @Html.DisplayFor(model => model.Owner)</li>
+									<li class="list-group-item">Stad: @Html.DisplayFor(model => model.Region)</li>
+									<li class="list-group-item">Ålder: @Html.DisplayFor(model => model.Age)</li>
+									<li class="list-group-item">Senast inloggad: @Html.DisplayFor(model => model.LastLogin)</li>
+									<li class="list-group-item">Ras: @Html.DisplayFor(model => model.Breed)</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+
+					
+					
+					<!--IMAGES HERE-->
+					<!--<div class="row">
+						<div class="container-fluid">
+							<div class="d-flex flex-wrap">
+
+								<div class="imagerow">
+									<a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+										<img src="https://unsplash.it/600.jpg?image=251" class="img-fluid rounded img-thumbnail" width="100px" data-title="A random title">
+									</a>
+									<a href="https://unsplash.it/1200/768.jpg?image=252" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+										<img src="https://unsplash.it/600.jpg?image=252" class="img-fluid rounded img-thumbnail" width="100px" data-title="Brooo title">
+									</a>
+									<a href="https://unsplash.it/1200/768.jpg?image=253" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+										<img src="https://unsplash.it/600.jpg?image=253" class="img-fluid rounded img-thumbnail" width="100px" data-title="A yooo title">
+									</a>
+								</div>
+								<div class="imagerow">
+									<a href="https://unsplash.it/1200/768.jpg?image=254" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+										<img src="https://unsplash.it/600.jpg?image=254" class="img-fluid rounded img-thumbnail" width="100px" data-title="My fine title">
+									</a>
+									<a href="https://unsplash.it/1200/768.jpg?image=255" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+										<img src="https://unsplash.it/600.jpg?image=255" class="img-fluid rounded img-thumbnail" width="100px" data-title="Heyy title">
+									</a>
+									<a href="https://unsplash.it/1200/768.jpg?image=256" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+										<img src="https://unsplash.it/600.jpg?image=256" class="img-fluid rounded img-thumbnail" width="100px" data-title="A random title">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

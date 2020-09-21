@@ -33,21 +33,36 @@ namespace DoggieDate.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Telefonnummer")]
-            public string PhoneNumber { get; set; }
-        }
+			[Display(Name = "Hundnamn")]
+			public string Dogname { get; set; }
+
+			[Display(Name = "Ägare")]
+			public string Owner { get; set; }
+
+			//Landskap
+			[Display(Name = "Landskap")]
+			public string Region { get; set; }
+
+			[Display(Name = "Ålder")]
+			public int? Age { get; set; }
+
+			[Display(Name = "Hundras")]
+			public string Breed { get; set; }
+		}
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var applicationUser = await _userManager.FindByIdAsync(user.Id);
 
-            Username = userName;
+            Username = applicationUser.UserName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Dogname = applicationUser.Dogname,
+                Owner = applicationUser.Owner,
+                Region = applicationUser.Region,
+                Age = applicationUser.Age,
+                Breed = applicationUser.Breed
             };
         }
 
@@ -77,15 +92,15 @@ namespace DoggieDate.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (!(Input is null))
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Oväntat fel vid inmatning av telefonnummer";
-                    return RedirectToPage();
-                }
+                user.Dogname = Input.Dogname;
+                user.Owner = Input.Owner;
+                user.Region = Input.Region;
+                user.Age = Input.Age;
+                user.Breed = Input.Breed;
+
+                await _userManager.UpdateAsync(user);
             }
 
             await _signInManager.RefreshSignInAsync(user);
