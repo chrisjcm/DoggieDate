@@ -85,6 +85,11 @@ namespace DoggieDate.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    user.LastLogin = DateTime.Now;
+                    await _userManager.UpdateAsync(user);
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -36,7 +36,6 @@ namespace DoggieDate.Data
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<Contact>().ToTable("Contacts");
-            builder.Entity<Animal>().ToTable("Animals");
             builder.Entity<Message>().ToTable("Messages");
 
             // PK Contacts
@@ -76,7 +75,6 @@ namespace DoggieDate.Data
 
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<Animal> Animal { get; set; }
 		public DbSet<Message> Message { get; set; }
 
 		public DbSet<hasTrait> hasTraits { get; set; }

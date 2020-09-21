@@ -3,28 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoggieDate.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Animals",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Breed = table.Column<string>(nullable: true),
-                    Gender = table.Column<string>(nullable: true),
-                    Color = table.Column<string>(nullable: true),
-                    Traits = table.Column<string>(nullable: true),
-                    Activities = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Animals", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
@@ -51,7 +33,13 @@ namespace DoggieDate.Migrations
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Dogname = table.Column<string>(nullable: true),
+                    Owner = table.Column<string>(nullable: true),
+                    Region = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    Breed = table.Column<string>(nullable: true),
+                    LastLogin = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -370,9 +358,6 @@ namespace DoggieDate.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Animals");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

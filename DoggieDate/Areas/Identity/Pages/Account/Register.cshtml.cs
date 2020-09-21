@@ -61,9 +61,25 @@ namespace DoggieDate.Areas.Identity.Pages.Account
             [Display(Name = "Bekräfta lösenord")]
             [Compare("Password", ErrorMessage = "Det bekräftade lösenordet matchar inte.")]
             public string ConfirmPassword { get; set; }
-        }
 
-        public async Task OnGetAsync(string returnUrl = null)
+			//[Display(Name = "Hundnamn")]
+			//public string Dogname { get; set; }
+
+			//[Display(Name = "Ägare")]
+			//public string Owner { get; set; }
+
+			////Landskap
+			//[Display(Name = "Landskap")]
+			//public string Region { get; set; }
+
+			//[Display(Name = "Ålder")]
+			//public int Age { get; set; }
+
+			//[Display(Name = "Hundras")]
+			//public string Breed { get; set; }
+		}
+
+		public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

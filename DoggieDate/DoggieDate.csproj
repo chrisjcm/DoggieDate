@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\ApplicationUser\Details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\lib\EkkoLightbox\EkkoLightbox.js" />
   </ItemGroup>
 
