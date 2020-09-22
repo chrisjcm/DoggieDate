@@ -30,7 +30,7 @@ namespace DoggieDate.Controllers
             user.Messages = await _context.Message
                 .Include(m => m.Receiver)
                 .Include(m => m.Sender)
-                .Where(c => c.ReceiverId == user.Id || c.SenderId == user.Id).ToListAsync();
+                .Where(c => c.ReceiverId == user.Id).ToListAsync();
             return View(user);
 
         }
@@ -47,9 +47,19 @@ namespace DoggieDate.Controllers
                 .Include(m => m.Receiver)
                 .Include(m => m.Sender)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (message == null)
             {
                 return NotFound();
+            }
+
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            if (message.ReceiverId == user.Id && !message.IsRead)
+            {
+                message.IsRead = true;
+                _context.Message.Update(message);
+                await _context.SaveChangesAsync();
             }
 
             return View(message);
@@ -59,9 +69,6 @@ namespace DoggieDate.Controllers
         public IActionResult Create()
         {
             // endast kontakter
-           
-            
-
             
             ViewData["Receiver"] = new SelectList(_context.User, "Email", "Email");
             return View();
@@ -146,36 +153,37 @@ namespace DoggieDate.Controllers
         //    return View(message);
         //}
 
-        // GET: Messages/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        //GET: Messages/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var message = await _context.Message
-        //        .Include(m => m.Receiver)
-        //        .Include(m => m.Sender)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (message == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var message = await _context.Message
+                .Include(m => m.Receiver)
+                .Include(m => m.Sender)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-        //    return View(message);
-        //}
+            if (message == null)
+            {
+                return NotFound();
+            }
 
-        //// POST: Messages/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var message = await _context.Message.FindAsync(id);
-        //    _context.Message.Remove(message);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return View(message);
+        }
+
+        // POST: Messages/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var message = await _context.Message.FindAsync(id);
+            _context.Message.Remove(message);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
         //private bool MessageExists(int id)
         //{
