@@ -59,11 +59,17 @@ namespace DoggieDate.Controllers
 			return View(user);
 		}
 
-		[Authorize(Roles = "Admin")]
+		//[Authorize(Roles = "Admin")]
 		public IActionResult Contacts()
 		{
 			ApplicationUser user = _userManager.GetUserAsync(User).Result;
-			user.Contacts = _context.Contact.Include(c => c.User).Include(c => c.UserContact).Where(c => c.UserId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true || c.ContactId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true).ToList<Contact>();
+			user.Contacts = _context.Contact
+				.Include(c => c.User)
+				.Include(c => c.UserContact)
+				.Where(c => 
+							c.UserId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true 
+						|| c.ContactId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true)
+				.ToList<Contact>();
 			return View(user);
 		}
 
