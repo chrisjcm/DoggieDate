@@ -17,9 +17,6 @@
                Avsändare
             </th>
             <th>
-               Mottagare
-            </th>
-            <th>
                text
             </th>
             <th>
@@ -36,9 +33,6 @@
                 @Html.DisplayFor(modelItem => item.Sender.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Receiver.Email)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Content)
             </td>
             <td>
@@ -48,7 +42,7 @@
             <td>
                 
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Svara</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
