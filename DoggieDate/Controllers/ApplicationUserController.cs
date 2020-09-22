@@ -20,24 +20,24 @@ namespace DoggieDate.Controllers
 			_userManager = userManager;
 		}
 
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.User;
-            return View(await applicationDbContext.ToListAsync());
-        }
+		public async Task<IActionResult> Index()
+		{
+			var applicationDbContext = _context.User;
+			return View(await applicationDbContext.ToListAsync());
+		}
 
 		public IActionResult Profile(string id)
 		{
-            ApplicationUser user;
+			ApplicationUser user;
 
-            if (string.IsNullOrWhiteSpace(id))
-            {
+			if (string.IsNullOrWhiteSpace(id))
+			{
 				user = _userManager.GetUserAsync(User).Result;
-            }
+			}
 			else
-            {
-                user = _userManager.FindByIdAsync(id).Result;
-            }
+			{
+				user = _userManager.FindByIdAsync(id).Result;
+			}
 
 			return View(user);
 		}

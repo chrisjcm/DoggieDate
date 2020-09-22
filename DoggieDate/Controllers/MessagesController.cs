@@ -23,11 +23,16 @@ namespace DoggieDate.Controllers
         }
 
         // GET: Messages
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ApplicationUser user = _userManager.GetUserAsync(User).Result;
-            user.Messages = _context.Message.Include(m => m.Receiver).Include(m => m.Sender).Where(c => c.ReceiverId == user.Id || c.SenderId == user.Id);
+            ApplicationUser user =await _userManager.GetUserAsync(User);
+
+            user.Messages = await _context.Message
+                .Include(m => m.Receiver)
+                .Include(m => m.Sender)
+                .Where(c => c.ReceiverId == user.Id || c.SenderId == user.Id).ToListAsync();
             return View(user);
+
         }
 
         // GET: Messages/Details/5
@@ -58,7 +63,7 @@ namespace DoggieDate.Controllers
             
 
             
-            ViewData["Receiver"] = new SelectList(_context.User, "UserName", "UserName");
+            ViewData["Receiver"] = new SelectList(_context.User, "Email", "Email");
             return View();
         }
 
