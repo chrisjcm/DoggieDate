@@ -25,7 +25,8 @@ namespace DoggieDate.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+		[AllowAnonymous]
+        public IActionResult About()
         {
             return View();
         }

@@ -49,9 +49,10 @@ namespace DoggieDate.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Lösenord")]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Kom ihåg mig")]
             public bool RememberMe { get; set; }
         }
 
@@ -84,6 +85,11 @@ namespace DoggieDate.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    user.LastLogin = DateTime.Now;
+                    await _userManager.UpdateAsync(user);
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200911115314_SeedData.cs" />
-    <Compile Remove="Migrations\20200911115314_SeedData.Designer.cs" />
+    <Content Remove="Views\ApplicationUser\Details.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
