@@ -3,6 +3,7 @@ using DoggieDate.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Specialized;
@@ -31,7 +32,7 @@ namespace DoggieDate.Controllers
 		public IActionResult Profile(string id)
 		{
 			ApplicationUser user;
-
+			ViewData["LoggedInUser"] = _userManager.GetUserAsync(User).Result;
 			if (string.IsNullOrWhiteSpace(id))
 			{
 				user = _userManager.GetUserAsync(User).Result;
@@ -42,6 +43,7 @@ namespace DoggieDate.Controllers
 			}
 
 			return View(user);
+			
 		}
 
 		//[AllowAnonymous]
@@ -63,16 +65,60 @@ namespace DoggieDate.Controllers
 		public IActionResult Contacts()
 		{
 			ApplicationUser user = _userManager.GetUserAsync(User).Result;
+
+
+			var a = _userManager.GetUserId(HttpContext.User).ToString();
 			user.Contacts = _context.Contact
 				.Include(c => c.User)
 				.Include(c => c.UserContact)
 				.Where(c => 
-							c.UserId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true 
-						|| c.ContactId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true)
+							c.UserId == a && c.Accepted == true 
+						|| c.ContactId == a && c.Accepted == true)
 				.ToList<Contact>();
 			return View(user);
 		}
 
+		public async Task<IActionResult> AddContact(string id)
+        {
+			
+			ApplicationUser currentUser= _userManager.GetUserAsync(User).Result;		
+			ApplicationUser ContactUser = _context.User.Find(id);
+			var myContact =await _context.Contact.Where(c => c.UserId == id && c.ContactId == currentUser.Id || c.UserId == currentUser.Id && c.ContactId == id)
+				.FirstOrDefaultAsync();
+			
+
+			if (myContact == null)
+			{
+				Contact cont = new Contact
+				{
+					UserId = currentUser.Id,
+					ContactId = id,
+					Accepted = false,
+					Blocked = false
+
+
+				};
+			_context.Add(cont);
+			}
+			else if (myContact.Accepted)
+            {
+				myContact.Accepted = false;
+				_context.Contact.Update(myContact);
+			}
+			else if (!myContact.Accepted && myContact.UserId == currentUser.Id)
+			{
+				
+				_context.Contact.Remove(myContact);
+			}
+			else
+            {
+				myContact.Accepted = true;
+				_context.Contact.Update(myContact);
+            }
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Profile));
+		}
+	
 		public async Task<IActionResult> DeleteContact(Contact id)
 		{
 			if (id == null)
