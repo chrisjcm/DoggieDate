@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -112,13 +112,23 @@
 
 
     <!-- Jumbotron Header -->
-	    <header class="jumbotron my-4">
-            <img src="https://w.wallhaven.cc/full/01/wallhaven-01g8ew.jpg" width="300" alt="Italian Trulli">
-            <h1 class="display-3">Wow this is a great About Page!</h1>
+	    <header class="jumbotron my-4" >
+            @*<img src="" class="rounded-right" width="450" alt="Responsive image">*@
+            <h3 class="display-3">Doggiedates historia</h3>
             <p class="lead">
-
-
-            About Page details here
+                Doggiedate grundades året 2020 i Sverige av ett gäng elever på Newton Yrkeshögskola och vart direkt en succeé på den nordiska marknaden. <br />
+                Doggiedate finns i 25 länder och erbjuder sina medlemmar de bästa sätten att träffa en lurvig partner! <br />
+                Varje dag är det mer än 500 000 aktiva singelhundar på den svenska sajten, och Doggiedate ordnar även månatligen populära events i Sveriges största parker.<br />
+            </p>
+            <h3>
+                Så fungerar det:
+            </h3>
+            <p class="lead">Hos Doggiedate kommer du enkelt i kontakt med nya hundar. Du kan använda oss i datorn, i mobilen och på surfplattan.<br />
+            Sidan är designad för att lätt kunna användas med både tass och hand. </p>
+            <h5>Kom igång</h5>
+            <p class="lead">För att kunna se andra singelhundar på Doggiedate behöver du registera dig med en unik epost och fylla i personlig information på din profilsida. <br />
+            Detta kostar förstås ingenting. Så fort du har skapat din profil kan du söka efter andra hundar.  <br />
+            Använd Like-knappen på de profiler som du är intresserad av att kommunicera med, skickar de en like tillbaka så kan du gå in på deras profil och se deras bilder och personlig info. <br />
             </p>
 
 		@if (!User.Identity.IsAuthenticated)
