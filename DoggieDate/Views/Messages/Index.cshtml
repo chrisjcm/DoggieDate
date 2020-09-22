@@ -33,10 +33,10 @@
 @foreach (var item in Model.Messages) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender.UserName)
+                @Html.DisplayFor(modelItem => item.Sender.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Receiver.UserName)
+                @Html.DisplayFor(modelItem => item.Receiver.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)

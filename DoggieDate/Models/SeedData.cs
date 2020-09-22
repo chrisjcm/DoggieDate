@@ -33,10 +33,12 @@ namespace DoggieDate.Models
             if (!context.User.Any())
             {
 
-                string[] userNames = { "admin@doggie.se", "admin@doggie.com" };
+                string[] userNames = { "admin@doggie.se", "admin@doggie.com", "adam@hej.com", "eva@hej.com" };
 
                 _ = CreateUserAsync(userNames[0], "Admin").Result;
                 _ = CreateUserAsync(userNames[1], "Admin").Result;
+                _ = CreateUserAsync(userNames[2], "Member").Result;
+                _ = CreateUserAsync(userNames[3], "Member").Result;
             }
 
             // Test hitta users med rollen Admin
