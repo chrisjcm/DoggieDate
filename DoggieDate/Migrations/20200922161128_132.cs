@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoggieDate.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class _132 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,7 +37,7 @@ namespace DoggieDate.Migrations
                     Dogname = table.Column<string>(nullable: true),
                     Owner = table.Column<string>(nullable: true),
                     Region = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: true),
                     Breed = table.Column<string>(nullable: true),
                     LastLogin = table.Column<DateTime>(nullable: false)
                 },

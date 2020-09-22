@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoggieDate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200921201648_Initialize")]
-    partial class Initialize
+    [Migration("20200922161128_132")]
+    partial class _132
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace DoggieDate.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Age")
+                    b.Property<int?>("Age")
                         .HasColumnType("int");
 
                     b.Property<string>("Breed")

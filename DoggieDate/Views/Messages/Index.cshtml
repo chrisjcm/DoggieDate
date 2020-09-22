@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoggieDate.Models.Message>
+﻿@model ApplicationUser
 
 @{
     ViewData["Title"] = "Index";
@@ -14,34 +14,29 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Sender)
+               Avsändare
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Receiver)
+               Mottagare
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+               text
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeStamp)
+                Skickat
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsRead)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reported)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Messages) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender.UserName)
+                @Html.DisplayFor(modelItem => item.Sender.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Receiver.UserName)
+                @Html.DisplayFor(modelItem => item.Receiver.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)
@@ -49,16 +44,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TimeStamp)
             </td>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.IsRead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reported)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Svara</a>
             </td>
         </tr>
 }
