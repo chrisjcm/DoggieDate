@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -91,7 +93,44 @@ namespace DoggieDate.Controllers
 		{
 			_context.Contact.Remove(id);
 			await _context.SaveChangesAsync();
+
 			return RedirectToAction(nameof(Contacts));
+		}
+
+
+		[BindProperty]
+		public InputModel Input { get; set; }
+
+        public class InputModel
+        {
+            public string RecieverId { get; set; }
+            public string Content { get; set; }
+        }
+
+        public IActionResult SendMessage(string id)
+        {
+			TempData["RecieverId"] = id;
+
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> SendMessage(Message message)
+		{
+			message = new Message
+			{
+				ReceiverId = TempData["RecieverId"].ToString(),
+				IsRead = false,
+				SenderId = _userManager.GetUserAsync(User).Result.Id,
+				Reported = false,
+				TimeStamp = DateTime.Now,
+				Content = Input.Content
+			};
+
+			_context.Add(message);
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Profile));
 		}
 	}
 }
