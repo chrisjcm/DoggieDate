@@ -24,11 +24,11 @@ namespace DoggieDate.Controllers
 			_userManager = userManager;
 		}
 
-		public async Task<IActionResult> Index()
-		{
-			var applicationDbContext = _context.User;
-			return View(await applicationDbContext.ToListAsync());
-		}
+		//public async Task<IActionResult> Index()
+		//{
+		//	var applicationDbContext = _context.User;
+		//	return View(await applicationDbContext.ToListAsync());
+		//}
 
 		public IActionResult Profile(string id)
 		{

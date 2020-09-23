@@ -13,21 +13,10 @@
         <p>Nej</p>
     }*@
 
-<!-- Page Content -->
-<!-- 2 radio controls . | Matched | Non Matched | -->
-<div class="container-fluid mb-3">
-    <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-        <label class="custom-control-label" for="customRadioInline1">Matchade</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-        <label class="custom-control-label" for="customRadioInline2">Alla användare</label>
-    </div>
-</div>
 
 <div class="container">
 
+<h1> Bläddra användare</h1>
     <!-- Modal - INLOGGNINGS POPUP -->
     <div class="container">
         <div class="modal fade" id="myModalLogin" role="dialog">
@@ -146,7 +135,7 @@
                               
                               
                                 <a href="@item.Avatar" data-toggle="lightbox" data-gallery="gallery">
-                                    <img src="@item.Avatar" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                    <img src="@item.Avatar" width="170" class="img-fluid rounded img-thumbnail" data-title="A random title">
                                 </a>
                                
 
@@ -156,8 +145,18 @@
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
-                                        <p>@item.Age År gammal  </p>
+                                        Ålder: @item.Age
                                     </li>
+									
+                                    <li class="list-group-item">
+                                        Hundras: @item.Breed
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        Hundnamn: @item.Dogname
+                                    </li>
+
+
                                     @if (Model != ViewData["LoggedInUser"])
                                     {
 
