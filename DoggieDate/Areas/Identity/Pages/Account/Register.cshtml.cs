@@ -52,7 +52,7 @@ namespace DoggieDate.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} Måste var minst {2} och max {1} karaktärer långt.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Lösenord")]
             public string Password { get; set; }
@@ -62,21 +62,7 @@ namespace DoggieDate.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "Det bekräftade lösenordet matchar inte.")]
             public string ConfirmPassword { get; set; }
 
-			//[Display(Name = "Hundnamn")]
-			//public string Dogname { get; set; }
-
-			//[Display(Name = "Ägare")]
-			//public string Owner { get; set; }
-
-			////Landskap
-			//[Display(Name = "Landskap")]
-			//public string Region { get; set; }
-
-			//[Display(Name = "Ålder")]
-			//public int Age { get; set; }
-
-			//[Display(Name = "Hundras")]
-			//public string Breed { get; set; }
+			
 		}
 
 		public async Task OnGetAsync(string returnUrl = null)
@@ -114,7 +100,7 @@ namespace DoggieDate.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email, "godkänn din email",
                         $"Vänligen bekräfta ditt konto genom att <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klicka här</a>.");
 
                     await AssignRoleAsync(Input.Email, "Member");
