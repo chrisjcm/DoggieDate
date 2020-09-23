@@ -3,7 +3,10 @@ using DoggieDate.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,26 +23,27 @@ namespace DoggieDate.Controllers
 			_userManager = userManager;
 		}
 
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.User;
-            return View(await applicationDbContext.ToListAsync());
-        }
+		public async Task<IActionResult> Index()
+		{
+			var applicationDbContext = _context.User;
+			return View(await applicationDbContext.ToListAsync());
+		}
 
 		public IActionResult Profile(string id)
 		{
-            ApplicationUser user;
-
-            if (string.IsNullOrWhiteSpace(id))
-            {
+			ApplicationUser user;
+			ViewData["LoggedInUser"] = _userManager.GetUserAsync(User).Result;
+			if (string.IsNullOrWhiteSpace(id))
+			{
 				user = _userManager.GetUserAsync(User).Result;
-            }
+			}
 			else
-            {
-                user = _userManager.FindByIdAsync(id).Result;
-            }
+			{
+				user = _userManager.FindByIdAsync(id).Result;
+			}
 
 			return View(user);
+			
 		}
 
 		//[AllowAnonymous]
@@ -57,14 +61,64 @@ namespace DoggieDate.Controllers
 			return View(user);
 		}
 
-		[Authorize(Roles = "Admin")]
+		//[Authorize(Roles = "Admin")]
 		public IActionResult Contacts()
 		{
 			ApplicationUser user = _userManager.GetUserAsync(User).Result;
-			user.Contacts = _context.Contact.Include(c => c.User).Include(c => c.UserContact).Where(c => c.UserId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true || c.ContactId == _userManager.GetUserId(HttpContext.User).ToString() && c.Accepted == true).ToList<Contact>();
+
+
+			var a = _userManager.GetUserId(HttpContext.User).ToString();
+			user.Contacts = _context.Contact
+				.Include(c => c.User)
+				.Include(c => c.UserContact)
+				.Where(c => 
+							c.UserId == a && c.Accepted == true 
+						|| c.ContactId == a && c.Accepted == true)
+				.ToList<Contact>();
 			return View(user);
 		}
 
+		public async Task<IActionResult> AddContact(string id)
+        {
+			
+			ApplicationUser currentUser= _userManager.GetUserAsync(User).Result;		
+			ApplicationUser ContactUser = _context.User.Find(id);
+			var myContact =await _context.Contact.Where(c => c.UserId == id && c.ContactId == currentUser.Id || c.UserId == currentUser.Id && c.ContactId == id)
+				.FirstOrDefaultAsync();
+			
+
+			if (myContact == null)
+			{
+				Contact cont = new Contact
+				{
+					UserId = currentUser.Id,
+					ContactId = id,
+					Accepted = false,
+					Blocked = false
+
+
+				};
+			_context.Add(cont);
+			}
+			else if (myContact.Accepted)
+            {
+				myContact.Accepted = false;
+				_context.Contact.Update(myContact);
+			}
+			else if (!myContact.Accepted && myContact.UserId == currentUser.Id)
+			{
+				
+				_context.Contact.Remove(myContact);
+			}
+			else
+            {
+				myContact.Accepted = true;
+				_context.Contact.Update(myContact);
+            }
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Profile));
+		}
+	
 		public async Task<IActionResult> DeleteContact(Contact id)
 		{
 			if (id == null)
@@ -91,7 +145,44 @@ namespace DoggieDate.Controllers
 		{
 			_context.Contact.Remove(id);
 			await _context.SaveChangesAsync();
+
 			return RedirectToAction(nameof(Contacts));
+		}
+
+
+		[BindProperty]
+		public InputModel Input { get; set; }
+
+        public class InputModel
+        {
+            public string RecieverId { get; set; }
+            public string Content { get; set; }
+        }
+
+        public IActionResult SendMessage(string id)
+        {
+			TempData["RecieverId"] = id;
+
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> SendMessage(Message message)
+		{
+			message = new Message
+			{
+				ReceiverId = TempData["RecieverId"].ToString(),
+				IsRead = false,
+				SenderId = _userManager.GetUserAsync(User).Result.Id,
+				Reported = false,
+				TimeStamp = DateTime.Now,
+				Content = Input.Content
+			};
+
+			_context.Add(message);
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Profile));
 		}
 	}
 }

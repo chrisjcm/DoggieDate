@@ -22,12 +22,17 @@
 						</div>
 
 						<ul class="list-group list-group-flush">
+                           @if(Model != ViewData["LoggedInUser"])
+                           {
+
 							<li class="list-group-item">
 
-								<!--class="btn btn-success" if matched-->
-								<button type="button" class="btn btn-outline-secondary">👍</button>
-								<button type="button" class="btn btn-outline-success" title="Skicka ett meddelande" data-toggle="modal" data-target="#ModalMessage" data-whatever="erik hundson">📧</button>
-							</li>
+                                <!--class="btn btn-success" if matched-->
+                                
+                                <input type="button" class="btn btn-outline-secondary" value="👍" onclick="location.href='@Url.Action("AddContact", new { Model.Id })'" />
+                                <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { Model.Id })'" />
+                            </li>
+                           }
 							
 
 		@if (User.IsInRole("Admin") )
