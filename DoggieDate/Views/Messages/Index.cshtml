@@ -14,39 +14,39 @@
     <thead>
         <tr>
             <th>
-               Avsändare
+                Avsändare
             </th>
             <th>
-               text
+                text
             </th>
             <th>
                 Skickat
             </th>
-           
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Messages)
-{
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sender.Email)
-            </td>
-            <td>
-			    @{var shortmsg = item.Content.Chop(30);}
-                @Html.DisplayFor(modelItem => shortmsg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeStamp)
-            </td>
-           
-            <td>
-                
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sender.Email)
+                </td>
+                <td>
+                    @{var shortmsg = item.Content.Chop(30);}
+                    @Html.DisplayFor(modelItem => shortmsg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeStamp)
+                </td>
+
+                <td>
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

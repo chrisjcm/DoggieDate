@@ -13,10 +13,21 @@
         <p>Nej</p>
     }*@
 
+<!-- Page Content -->
+<!-- 2 radio controls . | Matched | Non Matched | -->
+<div class="container-fluid mb-3">
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline1">Matchade</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline2">Alla användare</label>
+    </div>
+</div>
 
 <div class="container">
 
-<h1> Bläddra användare</h1>
     <!-- Modal - INLOGGNINGS POPUP -->
     <div class="container">
         <div class="modal fade" id="myModalLogin" role="dialog">
@@ -134,72 +145,59 @@
                             <div class="card ml-3 mb-3" style="width: 10rem;">
                               
                               
-                                <a href="@item.Avatar" data-toggle="lightbox" data-gallery="gallery">
-                                    <img src="@item.Avatar" width="170" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                <a href="@Url.Action("Profile", new { item.Id })">
+                                    <img src="@item.Avatar" class="img-fluid rounded img-thumbnail" data-title="A random title">
                                 </a>
                                
 
                                 <div class="card-body">
-                                    <h6 class="card-title">@item.UserName</h6>
+                                    <h6 class="card-title">@item.Dogname</h6>
                                 </div>
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
-                                        Ålder: @item.Age
+                                        <p>@item.Age År gammal  </p>
                                     </li>
-									
-                                    <li class="list-group-item">
-                                        Hundras: @item.Breed
-                                    </li>
-
-                                    <li class="list-group-item">
-                                        Hundnamn: @item.Dogname
-                                    </li>
-
-
-                                    @if (Model != ViewData["LoggedInUser"])
+                                    @if (item.Id != ViewData["LoggedInUser"].ToString())
                                     {
 
                                         <li class="list-group-item">
 
+
                                             <!--class="btn btn-success" if matched-->
+                                            @*@if (item.Contacts.ToList().FirstOrDefault(c => c.UserId == ViewData["LoggedInUser"].ToString()).Pending)
+                {
+                    <input type="button" class="btn btn-outline-secondary text-success" value="👍" onclick="location.href='@Url.Action("AddContact", new { item.Id })'" />
+                }
+                else
+                {*@
 
                                             <input type="button" class="btn btn-outline-secondary" value="👍" onclick="location.href='@Url.Action("AddContact", new { item.Id })'" />
+                                            @*}*@
+
                                             <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.Id })'" />
                                         </li>
                                     }
 
-                                    <li class="list-group-item">
-
-                                        <!-- Example single danger button -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-danger dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Handling
-                                            </button>
-
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Ge beröm</a>
-                                                <a class="dropdown-item" href="#">Ge varning</a>
-                                                <a class="dropdown-item" href="#">Spärra konto</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Återställ lösenord</a>
-
-                                                <a class="dropdown-item" href="#"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalMessage" data-whatever="erik">Skicka medd till @item.UserName</button></a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <!--MODERATOR DROPOWN-->
+                                        <li class="list-group-item">
+                                            <!-- Example single danger button -->
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Moderator
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Ge beröm</a>
+                                                    <a class="dropdown-item" href="#">Ge varning</a>
+                                                    <a class="dropdown-item" href="#">Spärra konto</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Återställ lösenord</a>
+                                                </div>
                                             </div>
-
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Ge beröm</a>
-                                                <a class="dropdown-item" href="#">Ge varning</a>
-                                                <a class="dropdown-item" href="#">Spärra konto</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Återställ lösenord</a>
-
-                                                <a class="dropdown-item" href="#">
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalMessage" data-whatever="fat">Skicka medd till fat</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
 
