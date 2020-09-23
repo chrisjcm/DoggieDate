@@ -13,6 +13,8 @@ namespace DoggieDate.Models
 
 		public IEnumerable<Contact> Contacts { get; set; }
 		public IEnumerable<Message> Messages { get; set; }
+        
+        public string Avatar { get; set; }
 
 		public string Dogname { get; set; }
 

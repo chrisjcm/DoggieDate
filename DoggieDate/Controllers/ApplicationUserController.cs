@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,13 +50,35 @@ namespace DoggieDate.Controllers
 		//[AllowAnonymous]
 		public IActionResult SearchUsers()
 		{
-			ApplicationUser user = _userManager.GetUserAsync(User).Result;
+			ApplicationUser currentUser = _userManager.GetUserAsync(User).Result;
+			var a = _userManager.GetUserId(HttpContext.User).ToString();
+			IEnumerable<ApplicationUser> users = _context.User.ToList().Where(c=>c.Id != currentUser.Id);
 
-			return View(user);
+
+
+			HashSet<string> userList = new HashSet<string>(_context.Contact
+				.Include(c => c.User)
+				.Include(c => c.UserContact)
+				.Where(c =>
+							c.UserId == a && c.Accepted == true
+						|| c.ContactId == a && c.Accepted == true).Select(x => x.UserId));
+
+			HashSet<string> userList2 = new HashSet<string>(_context.Contact
+				.Include(c => c.User)
+				.Include(c => c.UserContact)
+				.Where(c =>
+							c.UserId == a && c.Accepted == true
+						|| c.ContactId == a && c.Accepted == true).Select(x => x.ContactId));
+
+			userList.UnionWith(userList2);
+
+			users = users.Where(c => !userList.Contains(c.Id));
+			return View(users);
 		}
 
 		public IActionResult Messages()
 		{
+
 			ApplicationUser user = _userManager.GetUserAsync(User).Result;
 
 			return View(user);
@@ -75,6 +98,8 @@ namespace DoggieDate.Controllers
 							c.UserId == a && c.Accepted == true 
 						|| c.ContactId == a && c.Accepted == true)
 				.ToList<Contact>();
+			
+			
 			return View(user);
 		}
 
@@ -116,7 +141,8 @@ namespace DoggieDate.Controllers
 				_context.Contact.Update(myContact);
             }
 			await _context.SaveChangesAsync();
-			return RedirectToAction(nameof(Profile));
+			return RedirectToAction(nameof(SearchUsers));
+
 		}
 	
 		public async Task<IActionResult> DeleteContact(Contact id)
