@@ -145,7 +145,7 @@
                             <div class="card ml-3 mb-3" style="width: 10rem;">
                               
                               
-                                <a href="@item.Avatar" data-toggle="lightbox" data-gallery="gallery">
+                                <a href="@Url.Action("Profile", new { item.Id })">
                                     <img src="@item.Avatar" class="img-fluid rounded img-thumbnail" data-title="A random title">
                                 </a>
                                
@@ -158,16 +158,25 @@
                                     <li class="list-group-item">
                                         <p>@item.Age År gammal  </p>
                                     </li>
-                                    @if (Model != ViewData["LoggedInUser"])
+                                    @if (item.Id != ViewData["LoggedInUser"].ToString())
                                     {
 
-                                        <li class="list-group-item">
+                                <li class="list-group-item">
+                                   
 
-                                            <!--class="btn btn-success" if matched-->
+                                        <!--class="btn btn-success" if matched-->
+                                        @*@if (item.Contacts.ToList().FirstOrDefault(c => c.UserId == ViewData["LoggedInUser"].ToString()).Pending)
+                                        {
+                                            <input type="button" class="btn btn-outline-secondary text-success" value="👍" onclick="location.href='@Url.Action("AddContact", new { item.Id })'" />
+                                        }
+                                        else
+                                        {*@
 
                                             <input type="button" class="btn btn-outline-secondary" value="👍" onclick="location.href='@Url.Action("AddContact", new { item.Id })'" />
-                                            <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.Id })'" />
-                                        </li>
+                                        @*}*@
+                                   
+                                    <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.Id })'" />
+                                </li>
                                     }
 
                                     <li class="list-group-item">

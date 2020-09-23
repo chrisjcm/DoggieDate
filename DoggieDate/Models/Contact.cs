@@ -18,6 +18,9 @@ namespace DoggieDate.Models
         [DefaultValue(false)] // vet ej om behövs
         public bool Accepted { get; set; } // True = friends - False = pending invite
 
+        [DefaultValue(false)]
+        public bool Pending { get; set; }
+
         [DefaultValue(false)] // vet ej om behövs
         public bool Blocked { get; set; }
     }

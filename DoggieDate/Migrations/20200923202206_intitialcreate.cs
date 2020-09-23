@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoggieDate.Migrations
 {
-    public partial class _132 : Migration
+    public partial class intitialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,7 @@ namespace DoggieDate.Migrations
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Avatar = table.Column<string>(nullable: true),
                     Dogname = table.Column<string>(nullable: true),
                     Owner = table.Column<string>(nullable: true),
                     Region = table.Column<string>(nullable: true),
@@ -159,6 +160,7 @@ namespace DoggieDate.Migrations
                     UserId = table.Column<string>(nullable: false),
                     ContactId = table.Column<string>(nullable: false),
                     Accepted = table.Column<bool>(nullable: false),
+                    Pending = table.Column<bool>(nullable: false),
                     Blocked = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoggieDate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200923115720_123")]
-    partial class _123
+    [Migration("20200923202206_intitialcreate")]
+    partial class intitialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,6 +101,9 @@ namespace DoggieDate.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("Blocked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Pending")
                         .HasColumnType("bit");
 
                     b.HasKey("UserId", "ContactId");

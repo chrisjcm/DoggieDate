@@ -1,5 +1,5 @@
 ﻿@model DoggieDate.Models.ApplicationUser
-
+@using Microsoft.AspNetCore.Identity
 @{
 	ViewData["Title"] = "Profil";
 }
@@ -24,14 +24,21 @@
                         </div>
 
                         <ul class="list-group list-group-flush">
-                            @if (Model != ViewData["LoggedInUser"])
+                            @if (Model.Id != ViewData["LoggedInUser"].ToString())
                             {
 
                                 <li class="list-group-item">
 
-                                    <!--class="btn btn-success" if matched-->
+                                    
+									@if ((bool)ViewData["Bool"])
+                                    {
 
+                                    }
+                                    else
+                                    {
                                     <input type="button" class="btn btn-outline-secondary" value="👍" onclick="location.href='@Url.Action("AddContact", new { Model.Id })'" />
+
+                                    }
                                     <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { Model.Id })'" />
                                 </li>
                             }

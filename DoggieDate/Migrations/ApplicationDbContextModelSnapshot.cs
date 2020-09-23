@@ -101,6 +101,9 @@ namespace DoggieDate.Migrations
                     b.Property<bool>("Blocked")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Pending")
+                        .HasColumnType("bit");
+
                     b.HasKey("UserId", "ContactId");
 
                     b.HasIndex("ContactId");

@@ -33,7 +33,9 @@ namespace DoggieDate.Controllers
 		public IActionResult Profile(string id)
 		{
 			ApplicationUser user;
-			ViewData["LoggedInUser"] = _userManager.GetUserAsync(User).Result;
+			ViewData["LoggedInUser"] = _userManager.GetUserId(HttpContext.User).ToString();
+			ViewData["Bool"] = false;
+
 			if (string.IsNullOrWhiteSpace(id))
 			{
 				user = _userManager.GetUserAsync(User).Result;
@@ -41,7 +43,13 @@ namespace DoggieDate.Controllers
 			else
 			{
 				user = _userManager.FindByIdAsync(id).Result;
+				if (_context.Contact.Any(c => c.ContactId == user.Id && c.UserId == ViewData["LoggedInUser"].ToString() && c.Accepted==true || c.UserId == user.Id && c.ContactId == ViewData["LoggedInUser"].ToString() && c.Accepted == true))
+				{
+					ViewData["Bool"] = true;
+
+				}
 			}
+			
 
 			return View(user);
 			
@@ -50,6 +58,7 @@ namespace DoggieDate.Controllers
 		//[AllowAnonymous]
 		public IActionResult SearchUsers()
 		{
+			ViewData["LoggedInUser"] = _userManager.GetUserId(HttpContext.User).ToString();
 			ApplicationUser currentUser = _userManager.GetUserAsync(User).Result;
 			var a = _userManager.GetUserId(HttpContext.User).ToString();
 			IEnumerable<ApplicationUser> users = _context.User.ToList().Where(c=>c.Id != currentUser.Id);
@@ -119,25 +128,27 @@ namespace DoggieDate.Controllers
 					UserId = currentUser.Id,
 					ContactId = id,
 					Accepted = false,
-					Blocked = false
-
+					Blocked = false,
+					Pending = true
 
 				};
 			_context.Add(cont);
 			}
 			else if (myContact.Accepted)
             {
-				myContact.Accepted = false;
-				_context.Contact.Update(myContact);
+				//myContact.Accepted = false;
+				//_context.Contact.Update(myContact);
 			}
 			else if (!myContact.Accepted && myContact.UserId == currentUser.Id)
 			{
+
+				myContact.Pending = true;
 				
-				_context.Contact.Remove(myContact);
 			}
 			else
             {
 				myContact.Accepted = true;
+				myContact.Pending = false;
 				_context.Contact.Update(myContact);
             }
 			await _context.SaveChangesAsync();
