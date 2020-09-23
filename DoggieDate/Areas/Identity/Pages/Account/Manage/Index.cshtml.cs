@@ -33,7 +33,9 @@ namespace DoggieDate.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-			[Display(Name = "Hundnamn")]
+            [Display(Name = "Avatar")]
+            public string Avatar { get; set; }
+            [Display(Name = "Hundnamn")]
 			public string Dogname { get; set; }
 
 			[Display(Name = "Ägare")]
@@ -58,6 +60,7 @@ namespace DoggieDate.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                Avatar = applicationUser.Avatar,
                 Dogname = applicationUser.Dogname,
                 Owner = applicationUser.Owner,
                 Region = applicationUser.Region,
@@ -94,6 +97,7 @@ namespace DoggieDate.Areas.Identity.Pages.Account.Manage
 
             if (!(Input is null))
             {
+                user.Avatar = Input.Avatar;
                 user.Dogname = Input.Dogname;
                 user.Owner = Input.Owner;
                 user.Region = Input.Region;

@@ -20,9 +20,20 @@
                     <div class="col-md-6 m-b-2" >
                         <div class="p-10 bg-white">
                             <div class="media media-xs overflow-visible">
-                                <a class="media-left" href="javascript:;">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
-                                </a>
+                                @if (Model.UserName == item.UserContact.UserName)
+                                {
+
+                                    <a class="media-left" href="javascript:;">
+                                        <img src="@item.User.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                    </a>
+
+                                }
+                                else
+                                {
+                                    <a class="media-left" href="javascript:;">
+                                        <img src="@item.UserContact.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                    </a>
+                                }
                                 <div class="media-body valign-middle">
                                     @if (Model.UserName == item.UserContact.UserName)
                                     {
@@ -39,23 +50,38 @@
                                             Alternativ
                                         </button>
                                         <div class="dropdown-menu">
+
+                                            @if (Model.UserName == item.UserContact.UserName)
+                                            {
+
+                                                <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.User.Id})'" />
+                                            }
+                                            else
+                                            {
+                                                <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.UserContact.Id})'" />
+                                               
+                                            }
+
+                                            <!--class="btn btn-success" if matched-->
+
+
                                             
-                                            <a class="dropdown-item" data-toggle="modal" data-target="#ModalMessage" data-whatever="">Skicka meddelande</a>
+
                                             <div class="dropdown-divider"></div>
 
-                                             @Html.ActionLink("Ta bort", "DeleteContact",item)
+                                            @Html.ActionLink("Ta bort", "DeleteContact", item)
                                         </div>
                                     </div>
                                     @*<form asp-action="DeleteContactAsync">
 
-                                            <input type="hidden" asp-for="@item" />
-                                            <input type="submit" value="ta bort" class="btn btn-danger" />
-                                        </form>
-                                        <form asp-action="Messages">
+                <input type="hidden" asp-for="@item" />
+                <input type="submit" value="ta bort" class="btn btn-danger" />
+            </form>
+            <form asp-action="Messages">
 
-                                            <input type="hidden" asp-for="@item" />
-                                            <input type="submit" value="Skicka meddelande" class="btn btn-light" />
-                                        </form>*@
+                <input type="hidden" asp-for="@item" />
+                <input type="submit" value="Skicka meddelande" class="btn btn-light" />
+            </form>*@
                                 </div>
                             </div>
                         </div>
