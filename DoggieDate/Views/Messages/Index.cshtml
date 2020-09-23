@@ -1,4 +1,6 @@
-﻿@model ApplicationUser
+﻿@using DoggieDate.ExtensionMethods;
+
+@model ApplicationUser
 
 @{
     ViewData["Title"] = "Index";
@@ -25,13 +27,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Messages) {
+@foreach (var item in Model.Messages)
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Sender.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+			    @{var shortmsg = item.Content.Chop(30);}
+                @Html.DisplayFor(modelItem => shortmsg)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TimeStamp)

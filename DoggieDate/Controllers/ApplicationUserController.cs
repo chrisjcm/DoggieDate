@@ -23,7 +23,7 @@ namespace DoggieDate.Controllers
 			_context = context;
 			_userManager = userManager;
 		}
-
+		
 		//public async Task<IActionResult> Index()
 		//{
 		//	var applicationDbContext = _context.User;
@@ -41,7 +41,7 @@ namespace DoggieDate.Controllers
 			else
 			{
 				user = _userManager.FindByIdAsync(id).Result;
-			}
+			}			
 
 			return View(user);
 			
