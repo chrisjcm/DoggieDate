@@ -91,7 +91,16 @@ namespace DoggieDate.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser 
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Avatar = "https://www.iconfinder.com/data/icons/dog-and-cat-3/64/08-golden_retriever-puppy-pets-avatar-animals-animal-dog-512.png",
+                    Owner = Input.Email.Substring(0, Input.Email.IndexOf('@')),
+                    Breed = "Okänd",
+                    Region = "Sverige",
+                    Dogname = "Namnlös"
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

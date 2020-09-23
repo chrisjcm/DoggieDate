@@ -58,7 +58,9 @@ namespace DoggieDate.Models
                 NormalizedUserName = userName.ToUpper(),
                 Email = userName,
                 NormalizedEmail = userName.ToUpper(),
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                Avatar = "https://www.iconfinder.com/data/icons/dog-and-cat-3/64/08-golden_retriever-puppy-pets-avatar-animals-animal-dog-512.png"
+               
             };
 
             await _userManager.CreateAsync(user, "Admin_123");

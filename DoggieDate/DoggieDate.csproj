@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Content Remove="Views\ApplicationUser\Details.cshtml" />
+    <Content Remove="wwwroot\imgs\dflt.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\imgs\dflt.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
