@@ -33,7 +33,16 @@ namespace DoggieDate.Models
             if (!context.User.Any())
             {
 
-                string[] userNames = { "admin@doggie.se", "admin@doggie.com", "adam@hej.com", "eva@hej.com", "kalle@hej.com","martin@hej.com", "johan@hej.com", "sven@hej.com" };
+                string[] userNames = { 
+                        "admin@doggie.se", 
+                        "admin@doggie.com", 
+                        "adam@hej.com", 
+                        "eva@hej.com", 
+                        "kalle@hej.com",
+                        "martin@hej.com", 
+                        "johan@hej.com", 
+                        "sven@hej.com" 
+                    };
 
                 _ = CreateUserAsync(userNames[0], "Admin").Result;
                 _ = CreateUserAsync(userNames[1], "Admin").Result;
@@ -43,7 +52,61 @@ namespace DoggieDate.Models
                 _ = CreateUserAsync(userNames[5], "Member").Result;
                 _ = CreateUserAsync(userNames[6], "Member").Result;
                 _ = CreateUserAsync(userNames[7], "Member").Result;
-            }
+
+
+
+
+
+				//var user1 = new ApplicationUser
+				//{
+				//	UserName = userName,
+				//	NormalizedUserName = userName.ToUpper(),
+				//	Email = userName,
+				//	NormalizedEmail = userName.ToUpper(),
+				//	EmailConfirmed = true,
+				//	Avatar = "https://www.iconfinder.com/data/icons/dog-and-cat-3/64/08-golden_retriever-puppy-pets-avatar-animals-animal-dog-512.png",
+				//	Owner = userName.Substring(0, userName.IndexOf('@')),
+				//	Breed = "Okänd",
+				//	Region = "Sverige",
+				//	Dogname = "Namnlös",
+				//	Age = 0
+
+				//};
+				//_ = CreateUserAsync(user1, "Member").Result;
+
+				//var user2 = new ApplicationUser
+				//{
+				//	UserName = userName,
+				//	NormalizedUserName = userName.ToUpper(),
+				//	Email = userName,
+				//	NormalizedEmail = userName.ToUpper(),
+				//	EmailConfirmed = true,
+				//	Avatar = "https://www.iconfinder.com/data/icons/dog-and-cat-3/64/08-golden_retriever-puppy-pets-avatar-animals-animal-dog-512.png",
+				//	Owner = userName.Substring(0, userName.IndexOf('@')),
+				//	Breed = "Okänd",
+				//	Region = "Sverige",
+				//	Dogname = "Namnlös",
+				//	Age = 0
+
+				//};
+
+
+				//var user3 = new ApplicationUser
+				//{
+				//	UserName = userName,
+				//	NormalizedUserName = userName.ToUpper(),
+				//	Email = userName,
+				//	NormalizedEmail = userName.ToUpper(),
+				//	EmailConfirmed = true,
+				//	Avatar = "https://www.iconfinder.com/data/icons/dog-and-cat-3/64/08-golden_retriever-puppy-pets-avatar-animals-animal-dog-512.png",
+				//	Owner = userName.Substring(0, userName.IndexOf('@')),
+				//	Breed = "Okänd",
+				//	Region = "Sverige",
+				//	Dogname = "Namnlös",
+				//	Age = 0
+
+				//};
+			}
 
             // Test hitta users med rollen Admin
             //List<ApplicationUser> admins = _userManager.GetUsersInRoleAsync("Admin").Result.ToList();

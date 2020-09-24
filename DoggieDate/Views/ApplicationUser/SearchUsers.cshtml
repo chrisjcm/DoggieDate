@@ -13,19 +13,8 @@
         <p>Nej</p>
     }*@
 
+<h1>Bläddra användare</h1>
 <!-- Page Content -->
-<!-- 2 radio controls . | Matched | Non Matched | -->
-<div class="container-fluid mb-3">
-    <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-        <label class="custom-control-label" for="customRadioInline1">Matchade</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-        <label class="custom-control-label" for="customRadioInline2">Alla användare</label>
-    </div>
-</div>
-
 <div class="container">
 
     <!-- Modal - INLOGGNINGS POPUP -->
@@ -141,18 +130,13 @@
                     {
 
                         <div class=".col">
-
                             <div class="card ml-3 mb-3" style="width: 10rem;">
-                              
                               
                                 <a href="@Url.Action("Profile", new { item.Id })">
                                     <img src="@item.Avatar" class="img-fluid rounded img-thumbnail" data-title="A random title">
                                 </a>
                                
-
-                                <div class="card-body">
-                                    <h6 class="card-title">@item.Dogname</h6>
-                                </div>
+                                <p class="text-center"><small>@item.UserName</small></p>
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
@@ -172,10 +156,10 @@
                 else
                 {*@
 
-                                            <input type="button" class="btn btn-outline-secondary" value="👍" onclick="location.href='@Url.Action("AddContact", new { item.Id })'" />
+                                            <input type="button" class="btn btn-outline-primary" value="👍" onclick="location.href='@Url.Action("AddContact", new { item.Id })'" />
                                             @*}*@
 
-                                            <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.Id })'" />
+                                            <input type="button" class="btn btn-primary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.Id })'" />
                                         </li>
                                     }
 

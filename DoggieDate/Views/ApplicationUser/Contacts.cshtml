@@ -5,36 +5,23 @@
 }
 
 <h1>Dina Matchningar</h1>
-<div class="profile-content">
-    <!-- begin tab-content -->
-    <div class="tab-content p-0">
-        <!-- begin #profile-friends tab -->
-        <div class="tab-pane fade in active show" id="profile-friends">
-            
+<div class="container">
+            <div class="card">
+            <div class="Card-body">
             <!-- begin row -->
-            <div class="row row-space-2">
+            <div class="row">
+			    <div class="d-flex flex-wrap">
 
                 @foreach (var item in Model.Contacts)
                 {
                     <!-- begin col-6 -->
                     <div class="col-md-6 m-b-2" >
-                        <div class="p-10 bg-white">
                             <div class="media media-xs overflow-visible">
-                                @if (Model.UserName == item.UserContact.UserName)
-                                {
 
-                                    <a class="media-left" href="javascript:;">
-                                        <img src="@item.User.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
-                                    </a>
-
-                                }
-                                else
-                                {
-                                    <a class="media-left" href="javascript:;">
-                                        <img src="@item.UserContact.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
-                                    </a>
-                                }
-                                <div class="media-body valign-middle">
+                            <!--CARD-->
+                            <div class="card  m-3  text-center" style="width:25rem">
+                                <div class="card-header">
+                                    <!--USERNAME-->
                                     @if (Model.UserName == item.UserContact.UserName)
                                     {
                                         <b class="text-inverse">@Html.DisplayFor(modelItem => item.User.UserName) </b>
@@ -45,56 +32,78 @@
 
                                         <b class="text-inverse">@Html.DisplayFor(modelItem => item.UserContact.UserName)</b>
                                     }
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Alternativ
-                                        </button>
-                                        <div class="dropdown-menu">
+                                </div>
 
-                                            @if (Model.UserName == item.UserContact.UserName)
-                                            {
+                                <div class="Card-body text-center">
+                                
+                                    <div class="container">
+                                    <!--AVATAR BILD-->
+                                    @if (Model.UserName == item.UserContact.UserName)
+                                    {
 
-                                                <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.User.Id})'" />
-                                            }
-                                            else
-                                            {
-                                                <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { item.UserContact.Id})'" />
+                                        <a class="media-left" href="javascript:;">
+                                            <img src="@item.User.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                        </a>
+
+                                    }
+                                    else
+                                    {
+                                        <a class="media-left" href="javascript:;">
+                                            <img src="@item.UserContact.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                        </a>
+                                    }
+                                    </div>
+                                </div>
+
+                                    <div class="media-body">
+                                    
+
+                                        <!--DROP DOWN BUTTON-->
+                                        <div class="container">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Alternativ
+                                            </button>
+                                            <div class="dropdown-menu">
+
+                                                @if (Model.UserName == item.UserContact.UserName)
+                                                {
+
+                                                    <input type="button" class="btn btn-outline-primary ml-3" value="📧 Kontakta" onclick="location.href='@Url.Action("SendMessage", new { item.User.Id})'" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="button" class="btn btn-outline-primary ml-3" value="📧 Kontakta" onclick="location.href='@Url.Action("SendMessage", new { item.UserContact.Id})'" />
                                                
-                                            }
+                                                }
 
-                                            <!--class="btn btn-success" if matched-->
+                                                <!--class="btn btn-success" if matched-->
 
 
                                             
-
-                                            <div class="dropdown-divider"></div>
-
-                                            @Html.ActionLink("Ta bort", "DeleteContact", item)
+												
+                                                <div class="dropdown-divider"></div>
+                                                <p class="btn btn-outline-primary ml-3">@Html.ActionLink("⌦ Ta bort", "DeleteContact", item)</p>
+                                            </div>
                                         </div>
+										</div>
                                     </div>
-                                    @*<form asp-action="DeleteContactAsync">
 
-                <input type="hidden" asp-for="@item" />
-                <input type="submit" value="ta bort" class="btn btn-danger" />
-            </form>
-            <form asp-action="Messages">
-
-                <input type="hidden" asp-for="@item" />
-                <input type="submit" value="Skicka meddelande" class="btn btn-light" />
-            </form>*@
-                                </div>
                             </div>
-                        </div>
+                            
+
+
+                            </div>
                     </div>
 
                 }
+                </div>
             </div>
             <!-- end row -->
-        </div>
-        <!-- end #profile-friends tab -->
-    </div>
-    <!-- end tab-content -->
+			</div>
+			</div>
 </div>
+
 <div class="container">
     <div class="modal fade" id="ModalMessage" tabindex="-1" role="dialog" aria-labelledby="ModalMessageLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

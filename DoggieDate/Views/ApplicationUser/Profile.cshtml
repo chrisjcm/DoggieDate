@@ -5,6 +5,8 @@
 }
 
 <div class="container-fluid">
+	<h1>@Html.DisplayFor(model => model.UserName)</h1>
+
 	<div class="card">
 		<div class="card-body">
 			<div class="row">
@@ -12,14 +14,13 @@
 
                     <div class="card ml-3 mb-3" style="width: 18rem;">
 
-                       
                             <a href="@Model.Avatar" data-toggle="lightbox" data-gallery="gallery">
                                 <img src="@Model.Avatar" class="img-fluid rounded img-thumbnail" data-title="A random title">
                             </a>
                       
 
                         <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(model => model.Dogname)</h5>
+                            <h6 class="card-title">@Html.DisplayFor(model => model.Dogname)</h6>
                             
                         </div>
 
@@ -36,10 +37,10 @@
                                     }
                                     else
                                     {
-                                    <input type="button" class="btn btn-outline-secondary" value="👍" onclick="location.href='@Url.Action("AddContact", new { Model.Id })'" />
+                                    <input type="button" class="btn btn-outline-primary" value="👍" onclick="location.href='@Url.Action("AddContact", new { Model.Id })'" />
 
                                     }
-                                    <input type="button" class="btn btn-outline-secondary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { Model.Id })'" />
+                                    <input type="button" class="btn btn-primary" value="📧" onclick="location.href='@Url.Action("SendMessage", new { Model.Id })'" />
                                 </li>
                             }
 
