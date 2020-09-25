@@ -56,7 +56,7 @@ namespace DoggieDate.Models
 
 
 
-
+                //Better seeds needed.
 				//var user1 = new ApplicationUser
 				//{
 				//	UserName = userName,
@@ -108,13 +108,13 @@ namespace DoggieDate.Models
 				//};
 			}
 
-            // Test hitta users med rollen Admin
-            //List<ApplicationUser> admins = _userManager.GetUsersInRoleAsync("Admin").Result.ToList();
+			// Test hitta users med rollen Admin
+			//List<ApplicationUser> admins = _userManager.GetUsersInRoleAsync("Admin").Result.ToList();
 
-            // Test hitta users med rollen Member
-            //List<ApplicationUser> users = _userManager.GetUsersInRoleAsync("Member").Result.ToList();
+			// Test hitta users med rollen Member
+			//List<ApplicationUser> users = _userManager.GetUsersInRoleAsync("Member").Result.ToList();
 
-            context.SaveChanges();
+			context.SaveChanges();
         }
 
         private static async Task<IdentityResult> CreateUserAsync(string userName, string role)

@@ -13,9 +13,9 @@
         <p>Nej</p>
     }*@
 
-<h1>Bläddra användare</h1>
 <!-- Page Content -->
 <div class="container">
+    <h1>Bläddra användare</h1>
 
     <!-- Modal - INLOGGNINGS POPUP -->
     <div class="container">
@@ -140,7 +140,8 @@
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
-                                        <p>@item.Age År gammal  </p>
+                                        <p>Är @item.Age år gammal</p>
+										<p>@item.Breed</p>
                                     </li>
                                     @if (item.Id != ViewData["LoggedInUser"].ToString())
                                     {
