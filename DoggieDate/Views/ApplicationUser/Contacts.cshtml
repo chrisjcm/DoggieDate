@@ -1,0 +1,136 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Kontakter";
+}
+
+<h1>Dina Matchningar</h1>
+<div class="container">
+            <div class="card">
+            <div class="Card-body">
+            <!-- begin row -->
+            <div class="row">
+			    <div class="d-flex flex-wrap">
+
+                @foreach (var item in Model.Contacts)
+                {
+                    <!-- begin col-6 -->
+                    <div class="col-md-6 m-b-2" >
+                            <div class="media media-xs overflow-visible">
+
+                            <!--CARD-->
+                            <div class="card  m-3  text-center" style="width:25rem">
+                                <div class="card-header">
+                                    <!--USERNAME-->
+                                    @if (Model.UserName == item.UserContact.UserName)
+                                    {
+                                        <b class="text-inverse">@Html.DisplayFor(modelItem => item.User.UserName) </b>
+
+                                    }
+                                    else
+                                    {
+
+                                        <b class="text-inverse">@Html.DisplayFor(modelItem => item.UserContact.UserName)</b>
+                                    }
+                                </div>
+
+                                <div class="Card-body text-center">
+                                
+                                    <div class="container">
+                                    <!--AVATAR BILD-->
+                                    @if (Model.UserName == item.UserContact.UserName)
+                                    {
+
+                                        <a class="media-left" href="javascript:;">
+                                            <img src="@item.User.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                        </a>
+
+                                    }
+                                    else
+                                    {
+                                        <a class="media-left" href="javascript:;">
+                                            <img src="@item.UserContact.Avatar" width="100" class="img-fluid rounded img-thumbnail" data-title="A random title">
+                                        </a>
+                                    }
+                                    </div>
+                                </div>
+
+                                    <div class="media-body">
+                                    
+
+                                        <!--DROP DOWN BUTTON-->
+                                        <div class="container">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Alternativ
+                                            </button>
+                                            <div class="dropdown-menu">
+
+                                                @if (Model.UserName == item.UserContact.UserName)
+                                                {
+
+                                                    <input type="button" class="btn btn-outline-primary ml-3" value="📧 Kontakta" onclick="location.href='@Url.Action("SendMessage", new { item.User.Id})'" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="button" class="btn btn-outline-primary ml-3" value="📧 Kontakta" onclick="location.href='@Url.Action("SendMessage", new { item.UserContact.Id})'" />
+                                               
+                                                }
+
+                                                <!--class="btn btn-success" if matched-->
+
+
+                                            
+												
+                                                <div class="dropdown-divider"></div>
+                                                <p class="btn btn-outline-primary ml-3">@Html.ActionLink("⌦ Ta bort", "DeleteContact", item)</p>
+                                            </div>
+                                        </div>
+										</div>
+                                    </div>
+
+                            </div>
+                            
+
+
+                            </div>
+                    </div>
+
+                }
+                </div>
+            </div>
+            <!-- end row -->
+			</div>
+			</div>
+</div>
+
+<div class="container">
+    <div class="modal fade" id="ModalMessage" tabindex="-1" role="dialog" aria-labelledby="ModalMessageLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalMessageLabel">Nytt Meddelande</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Mottagare:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Meddelande:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                    <button type="button" class="btn btn-primary">Skicka meddelande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

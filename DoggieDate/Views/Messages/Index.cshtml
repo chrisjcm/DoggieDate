@@ -1,0 +1,52 @@
+﻿@using DoggieDate.ExtensionMethods;
+
+@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Dina meddelanden</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Avsändare
+            </th>
+            <th>
+                text
+            </th>
+            <th>
+                Skickat
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sender.Email)
+                </td>
+                <td>
+                    @{var shortmsg = item.Content.Chop(30);}
+                    @Html.DisplayFor(modelItem => shortmsg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeStamp)
+                </td>
+
+                <td>
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Ta Bort</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

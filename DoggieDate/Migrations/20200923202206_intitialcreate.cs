@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoggieDate.Migrations
 {
-    public partial class Init : Migration
+    public partial class intitialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +34,13 @@ namespace DoggieDate.Migrations
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Avatar = table.Column<string>(nullable: true),
+                    Dogname = table.Column<string>(nullable: true),
+                    Owner = table.Column<string>(nullable: true),
+                    Region = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: true),
+                    Breed = table.Column<string>(nullable: true),
+                    LastLogin = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,6 +153,136 @@ namespace DoggieDate.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    ContactId = table.Column<string>(nullable: false),
+                    Accepted = table.Column<bool>(nullable: false),
+                    Pending = table.Column<bool>(nullable: false),
+                    Blocked = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => new { x.UserId, x.ContactId });
+                    table.ForeignKey(
+                        name: "FK_Contacts_Users_ContactId",
+                        column: x => x.ContactId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Contacts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderId = table.Column<string>(nullable: true),
+                    ReceiverId = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    IsRead = table.Column<bool>(nullable: false),
+                    Reported = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Users_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Messages_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTraits",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    ApplicationUserId1 = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTraits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserTraits_Users_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserTraits_Users_ApplicationUserId1",
+                        column: x => x.ApplicationUserId1,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "hasTraits",
+                columns: table => new
+                {
+                    TraitId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_hasTraits", x => new { x.TraitId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_hasTraits_UserTraits_TraitId",
+                        column: x => x.TraitId,
+                        principalTable: "UserTraits",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_hasTraits_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "wantsTraits",
+                columns: table => new
+                {
+                    TraitId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_wantsTraits", x => new { x.TraitId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_wantsTraits_UserTraits_TraitId",
+                        column: x => x.TraitId,
+                        principalTable: "UserTraits",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_wantsTraits_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -167,6 +304,26 @@ namespace DoggieDate.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Contacts_ContactId",
+                table: "Contacts",
+                column: "ContactId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_hasTraits_UserId",
+                table: "hasTraits",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_ReceiverId",
+                table: "Messages",
+                column: "ReceiverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderId",
+                table: "Messages",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "Roles",
                 column: "NormalizedName",
@@ -184,6 +341,21 @@ namespace DoggieDate.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTraits_ApplicationUserId",
+                table: "UserTraits",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTraits_ApplicationUserId1",
+                table: "UserTraits",
+                column: "ApplicationUserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_wantsTraits_UserId",
+                table: "wantsTraits",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -204,7 +376,22 @@ namespace DoggieDate.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "hasTraits");
+
+            migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "wantsTraits");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "UserTraits");
 
             migrationBuilder.DropTable(
                 name: "Users");
